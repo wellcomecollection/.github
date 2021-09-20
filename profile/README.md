@@ -1,6 +1,6 @@
 # 👋 Hello
 
-The Wellcome Collection are building a digital platform for Wellcome Collection, enabling us to improve the experience we offer to readers and researchers. We aim to make it easier for third-party developers to build things with our data and collections.
+We are building a digital platform for Wellcome Collection, enabling us to improve the experience we offer to readers and researchers. We aim to make it easier for third-party developers to build things with our data and collections.
 
 This means providing programmatic access to our digital assets, metadata and web content by developing a simple, unified and coherent set of APIs.
 
