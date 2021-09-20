@@ -4,7 +4,9 @@ We are building a digital platform for Wellcome Collection, enabling us to impro
 
 This means providing programmatic access to our digital assets, metadata and web content by developing a simple, unified and coherent set of APIs.
 
-You can read documentation for our APIs at <https://developers.wellcomecollection.org/>.
+Documentation for our APIs: https://developers.wellcomecollection.org/
+
+Our roadmap: https://roadmap.wellcomecollection.org/
 
 ## Developing in the open
 
