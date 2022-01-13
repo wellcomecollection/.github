@@ -13,9 +13,7 @@ We develop in the open, so that others can learn from our mistakes and successes
 
 ## Key services
 
-<!-- ![A diagram showing the major services in wellcomecollection.org](./services.png) -->
-
-![](services.png)
+![A diagram showing the major services in wellcomecollection.org](https://raw.githubusercontent.com/wellcomecollection/.github/main/profile/services.png)
 
 -   The Wellcome Collection website is the public face of our digital offering, and it pulls in content from a variety of services.
     (repo: [wellcomecollection.org](https://github.com/wellcomecollection/wellcomecollection.org)).
