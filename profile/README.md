@@ -9,7 +9,8 @@ They include:
 
 Our GitHub account contains the code and configuration we use to build and run these services.
 Everything we've made is open source, made available under an MIT licence.
-We develop in the open, so that others can learn from our mistakes and successes.
+
+We work in the open, so that others can learn from our mistakes and successes.
 
 ## Key services
 
