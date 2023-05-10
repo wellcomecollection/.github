@@ -3,7 +3,7 @@
 Digital media and services are vital to our mission.
 They include:
 
--   A unified search for all our collections, both [on our website](https://wellcomecollection.org/collections) and [as open APIs](https://developers.wellcomecollection.org/catalogue)
+-   A unified search for all our collections, both [on our website](https://wellcomecollection.org/collections) and [as open APIs](https://developers.wellcomecollection.org/docs/api)
 -   Access to millions of digitised images through [IIIF APIs](https://developers.wellcomecollection.org/images), shared with open and permissive licences
 -   Long-form narrative content published at <https://wellcomecollection.org/stories>
 
