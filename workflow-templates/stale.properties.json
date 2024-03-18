@@ -1,0 +1,5 @@
+{
+    "name": "Wellcome Collection Stale PR Handler",
+    "description": "A GitHub Action workflow to automatically clean up old pull requests that have not seen any activity",
+    "iconName": "wellcome"
+  }
