@@ -16,8 +16,8 @@ We work in the open, so that others can learn from our mistakes and successes. A
 * [Developer Handbook](https://app.gitbook.com/o/-LumfFcEMKx4gYXKAZTQ/s/DPDDj27NI2F2kPukWrC1/)
 * [Requests For Comments (RFCs)](https://app.gitbook.com/o/-LumfFcEMKx4gYXKAZTQ/s/Nmj83rEtrdquZ9vSuejV/)
 * [Architecture Decision Records (ADRs)](https://app.gitbook.com/o/-LumfFcEMKx4gYXKAZTQ/s/Li10eL6BNOv2BjSYigYM/)
-* Fortnotes (Fortnightly updates about our work)
-* Incident Retrospectives
+* [Fortnotes (Fortnightly updates about our work)](https://app.gitbook.com/o/-LumfFcEMKx4gYXKAZTQ/s/cX9ATx2qsrRjoDVo2roD/)
+* [Incident Retrospectives](https://app.gitbook.com/o/-LumfFcEMKx4gYXKAZTQ/s/cZ3Lhpu6Pxexs4l5Ylyz/)
 
 This documentation is for people who want to know how the platform is built, or want to build more of it. If that's not you, you might be looking for:
 
