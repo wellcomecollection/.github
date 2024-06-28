@@ -10,5 +10,15 @@ Digital media and services are vital to our mission, they include:
 
 We work in the open, so that others can learn from our mistakes and successes. All the services  we've built in-house are open source, made available under an MIT licence.
 
+**Contents**
+
 * [Service Overview](service-overview.md)
 * [Developer Handbook](https://app.gitbook.com/o/-LumfFcEMKx4gYXKAZTQ/s/DPDDj27NI2F2kPukWrC1/)
+* [Requests For Comments (RFCs)](https://app.gitbook.com/o/-LumfFcEMKx4gYXKAZTQ/s/Nmj83rEtrdquZ9vSuejV/)
+* Architecture Decision Records (ADRs)
+
+This documentation is for people who want to know how the platform is built, or want to build more of it. If that's not you, you might be looking for:
+
+* [**developers.wellcomecollection.org**](https://developers.wellcomecollection.org/) is the documentation for developers who are **using** our APIs.
+* [**stacks.wellcometrust.org**](https://stacks.wellcomecollection.org/) is our Medium blog with standalone articles about our work.
+* [**wellcomecollection.org**](https://wellcomecollection.org/) is the public-facing site, including an [images search](https://wellcomecollection.org/works) backed by our APIs.
