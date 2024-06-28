@@ -18,6 +18,7 @@ We work in the open, so that others can learn from our mistakes and successes. A
 * [Architecture Decision Records (ADRs)](https://app.gitbook.com/o/-LumfFcEMKx4gYXKAZTQ/s/Li10eL6BNOv2BjSYigYM/)
 * [Fortnotes (Fortnightly updates about our work)](https://app.gitbook.com/o/-LumfFcEMKx4gYXKAZTQ/s/cX9ATx2qsrRjoDVo2roD/)
 * [Incident Retrospectives](https://app.gitbook.com/o/-LumfFcEMKx4gYXKAZTQ/s/cZ3Lhpu6Pxexs4l5Ylyz/)
+* [Platform Issues](https://github.com/wellcomecollection/platform/issues)
 
 This documentation is for people who want to know how the platform is built or want to build more of it,  you might also be looking for:
 
@@ -25,3 +26,5 @@ This documentation is for people who want to know how the platform is built or w
 * [**stacks.wellcometrust.org**](https://stacks.wellcomecollection.org/) is our Medium blog with standalone articles about our work.
 * [**wellcomecollection.org**](https://wellcomecollection.org/) is the public-facing site, including an [images search](https://wellcomecollection.org/works) backed by our APIs.
 * [**Notion (Wellcome Collection Digital Product):** ](https://www.notion.so/wellcometrust/Wellcome-Collection-digital-product-6eda38f9f86a4741bdd01e3de851fdf1)product & design documentation, (currently private).
+
+_This page is available in [GitHub](https://github.com/wellcomecollection) and [GitBook](https://docs.wellcomecollection.org/index)._
