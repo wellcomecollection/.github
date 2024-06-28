@@ -19,7 +19,7 @@ We work in the open, so that others can learn from our mistakes and successes. A
 * [Fortnotes (Fortnightly updates about our work)](https://app.gitbook.com/o/-LumfFcEMKx4gYXKAZTQ/s/cX9ATx2qsrRjoDVo2roD/)
 * [Incident Retrospectives](https://app.gitbook.com/o/-LumfFcEMKx4gYXKAZTQ/s/cZ3Lhpu6Pxexs4l5Ylyz/)
 
-This documentation is for people who want to know how the platform is built, or want to build more of it. If that's not you, you might be looking for:
+This documentation is for people who want to know how the platform is built or want to build more of it,  you might also be looking for:
 
 * [**developers.wellcomecollection.org**](https://developers.wellcomecollection.org/) is the documentation for developers who are **using** our APIs.
 * [**stacks.wellcometrust.org**](https://stacks.wellcomecollection.org/) is our Medium blog with standalone articles about our work.
