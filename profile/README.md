@@ -24,3 +24,4 @@ This documentation is for people who want to know how the platform is built or w
 * [**developers.wellcomecollection.org**](https://developers.wellcomecollection.org/) is the documentation for developers who are **using** our APIs.
 * [**stacks.wellcometrust.org**](https://stacks.wellcomecollection.org/) is our Medium blog with standalone articles about our work.
 * [**wellcomecollection.org**](https://wellcomecollection.org/) is the public-facing site, including an [images search](https://wellcomecollection.org/works) backed by our APIs.
+* [**Notion (Wellcome Collection Digital Product):** ](https://www.notion.so/wellcometrust/Wellcome-Collection-digital-product-6eda38f9f86a4741bdd01e3de851fdf1)product & design documentation, (currently private).
