@@ -15,7 +15,7 @@ We work in the open, so that others can learn from our mistakes and successes. A
 * [Service Overview](service-overview.md)
 * [Developer Handbook](https://app.gitbook.com/o/-LumfFcEMKx4gYXKAZTQ/s/DPDDj27NI2F2kPukWrC1/)
 * [Requests For Comments (RFCs)](https://app.gitbook.com/o/-LumfFcEMKx4gYXKAZTQ/s/Nmj83rEtrdquZ9vSuejV/)
-* Architecture Decision Records (ADRs)
+* [Architecture Decision Records (ADRs)](https://app.gitbook.com/o/-LumfFcEMKx4gYXKAZTQ/s/Li10eL6BNOv2BjSYigYM/)
 
 This documentation is for people who want to know how the platform is built, or want to build more of it. If that's not you, you might be looking for:
 
