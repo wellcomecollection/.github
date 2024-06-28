@@ -10,7 +10,7 @@ Digital media and services are vital to our mission, they include:
 
 We work in the open, so that others can learn from our mistakes and successes. All the services  we've built in-house are open source, made available under an MIT licence.
 
-**Contents**
+**Further information**
 
 * [Service Overview](service-overview.md)
 * [Developer Handbook](https://app.gitbook.com/o/-LumfFcEMKx4gYXKAZTQ/s/DPDDj27NI2F2kPukWrC1/)
