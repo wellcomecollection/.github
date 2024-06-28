@@ -1,6 +1,4 @@
-# Key Services
-
-### Overview
+# Service Overview
 
 ![A diagram showing the major services in wellcomecollection.org](https://raw.githubusercontent.com/wellcomecollection/.github/main/profile/services.png)
 
