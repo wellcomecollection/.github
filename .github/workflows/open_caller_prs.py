@@ -1,13 +1,16 @@
 #!/usr/bin/env python
 """
-Whenever a new reusable workflow is created or updated, we want to open a PR in every repository from which we want to call it
+Whenever a new reusable workflow is created or updated, we want to open a PR in every repository from which we want to call it.
 
-This script takes a workflow filename and a list of repositories as a comma-separated list, eg.
+First create a template for the caller workflow in .github/workflows/caller-templates, that will be copied into the target repos.
 
-python stale.yml catalogue-api,catalogue-pipeline
+This script takes the template file name and a list of target repositories as a comma-separated list, eg.
+
+    python stale.yml catalogue-api,catalogue-pipeline
 
 will copy the stale.yml file stored locally in .github/workflows/caller-templates folder (source directory)
-into the .github/workflows directory of the target repositories
+into the .github/workflows directory of the target repositories.
+
 
 For each repository it:
 - gets the last PR merged to the .github repository for reference in the target repository PR
