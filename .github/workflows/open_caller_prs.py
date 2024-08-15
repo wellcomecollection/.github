@@ -15,10 +15,11 @@ into the .github/workflows directory of the target repositories.
 For each repository it:
 - gets the last PR merged to the .github repository for reference in the target repository PR
 - clones the target repository into a temporary directory, and cd into it
-- write the source directory's template_workflow_file into the target's /.github/workflows directory
+- writes the source directory's template_workflow_file into the target's /.github/workflows directory
 - git checkout, add, commit and push to the target's remote 
-- open a PR against origin/main
-- request a review from "scala-reviewers" and "js-ts-reviewers"
+- opens a PR against origin/main
+- requests a review from "scala-reviewers" and "js-ts-reviewers"
+- once this is all done, moves back to the source directory and removes the temporary directory
 """
 
 import sys
