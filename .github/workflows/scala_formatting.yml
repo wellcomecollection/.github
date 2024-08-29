@@ -1,8 +1,7 @@
 # Runs auto-formatting script on push to any branch
 name: "Run auto formatting"
 
-# not sure whether these need to be in the caller or called workflow
-
+# Unsure whether these need to be on the caller or called workflow
 # permissions:
 #   id-token: write
 #   contents: write
