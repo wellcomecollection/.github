@@ -2,9 +2,9 @@
 name: "Run auto formatting"
 
 # Unsure whether these need to be on the caller or called workflow
-# permissions:
-#   id-token: write
-#   contents: write
+permissions:
+  id-token: write
+  contents: write
 
 on: workflow_call
 
