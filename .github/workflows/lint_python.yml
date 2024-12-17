@@ -1,0 +1,14 @@
+name: "Python lint"
+
+on: workflow_call
+
+jobs:
+  flake8-lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Python environment
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+      - name: flake8 Lint
+        uses: py-actions/flake8@v2
