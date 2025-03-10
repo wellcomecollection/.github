@@ -1,8 +1,6 @@
 name: Update Dependency Graph
-on:
-  push:
-    branches:
-      - main
+
+on: workflow_call
 
 permissions:
   id-token: write
