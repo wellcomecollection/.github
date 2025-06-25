@@ -10,7 +10,7 @@ permissions:
 jobs:
   dependency-graph:
     name: Update Dependency Graph
-    runs-on: default_x64_latest
+    runs-on: ubuntu-latest
     steps:
       - name: Install sbt
         uses: sbt/setup-sbt@v1
