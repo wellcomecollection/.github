@@ -8,18 +8,16 @@ Digital media and services are vital to our mission, they include:
 * Access to millions of digitised images through [IIIF APIs](https://developers.wellcomecollection.org/images), shared with open and permissive licences
 * Long-form narrative content published at [https://wellcomecollection.org/stories](https://wellcomecollection.org/stories)
 
-We work in the open, so that others can learn from our mistakes and successes. All the services  we've built in-house are open source, made available under an MIT licence.
+We work in the open, so that others can learn from our mistakes and successes. 
+
+All the services we've built in-house are open source, made available under an MIT licence.
 
 **Further information**
 
 * [Service Overview](service-overview.md)
 * [Developer Handbook](https://app.gitbook.com/o/-LumfFcEMKx4gYXKAZTQ/s/DPDDj27NI2F2kPukWrC1/)
-* [Requests For Comments (RFCs)](https://app.gitbook.com/o/-LumfFcEMKx4gYXKAZTQ/s/Nmj83rEtrdquZ9vSuejV/)
-* [Architecture Decision Records (ADRs)](https://app.gitbook.com/o/-LumfFcEMKx4gYXKAZTQ/s/Li10eL6BNOv2BjSYigYM/)
-* [Fortnotes (Fortnightly updates about our work)](https://app.gitbook.com/o/-LumfFcEMKx4gYXKAZTQ/s/cX9ATx2qsrRjoDVo2roD/)
-* [Incident Retrospectives](https://app.gitbook.com/o/-LumfFcEMKx4gYXKAZTQ/s/cZ3Lhpu6Pxexs4l5Ylyz/)
-* [Platform Issues](https://github.com/wellcomecollection/platform/issues)
-
+* [Technical Documentation](https://github.com/wellcomecollection/docs/blob/main/README.md)
+  
 This documentation is for people who want to know how the platform is built or want to build more of it,  you might also be looking for:
 
 * [**developers.wellcomecollection.org**](https://developers.wellcomecollection.org/) is the documentation for developers who are **using** our APIs.
