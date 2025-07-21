@@ -16,6 +16,11 @@ inputs:
   role_to_assume:
     description: "role to assume when pushing the image to ECR"
     required: true
+  publish_latest:
+    description: "Whether to publish an image with the 'latest' tag"
+    required: false
+    type: 'boolean'
+    default: 'false'
 runs:
   using: "composite"
   steps:
@@ -26,7 +31,7 @@ runs:
       shell: bash
 
     - name: publish versioned container to registry
-      uses: ./.github/actions/push_to_ecr
+      uses: wellcomecollection/.github/.github/actions/push_to_ecr
       with:
         registry: ${{inputs.registry}}
         image_name: ${{inputs.target}}
@@ -35,8 +40,9 @@ runs:
         role_to_assume: ${{inputs.role_to_assume}}
 
     - name: publish latest container to registry
-      uses: ./.github/actions/push_to_ecr
-      if: ${{ github.ref == 'refs/heads/main' }}
+      uses: wellcomecollection/.github/.github/actions/push_to_ecr
+      if: ${{ inputs.publish_latest }}
+#      if: ${{ github.ref == 'refs/heads/main' }}
       with:
         registry: 760097843905.dkr.ecr.eu-west-1.amazonaws.com/uk.ac.wellcome
         image_name: ${{inputs.target}}
