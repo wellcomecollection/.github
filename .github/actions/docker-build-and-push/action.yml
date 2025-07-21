@@ -31,7 +31,7 @@ runs:
       shell: bash
 
     - name: publish versioned container to registry
-      uses: wellcomecollection/.github/.github/actions/push_to_ecr
+      uses: wellcomecollection/.github/.github/actions/push_to_ecr@main
       with:
         registry: ${{inputs.registry}}
         image_name: ${{inputs.target}}
@@ -40,9 +40,8 @@ runs:
         role_to_assume: ${{inputs.role_to_assume}}
 
     - name: publish latest container to registry
-      uses: wellcomecollection/.github/.github/actions/push_to_ecr
+      uses: wellcomecollection/.github/.github/actions/push_to_ecr@main
       if: ${{ inputs.publish_latest }}
-#      if: ${{ github.ref == 'refs/heads/main' }}
       with:
         registry: 760097843905.dkr.ecr.eu-west-1.amazonaws.com/uk.ac.wellcome
         image_name: ${{inputs.target}}
