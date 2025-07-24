@@ -1,9 +1,25 @@
-name: 'Python Check'
-description: "Runs checks (linting, tests) on the python code within the given folder"
+name: "Python Check"
+description: "Runs checks (linting, formatting, type checking, tests) on the python code within the given folder"
 inputs:
   folder:
     description: folder to check
     required: true
+  skip-format-check:
+    description: "Skip ruff format check"
+    required: false
+    default: "false"
+  skip-type-check:
+    description: "Skip mypy type check"
+    required: false
+    default: "false"
+  skip-lint:
+    description: "Skip ruff lint check"
+    required: false
+    default: "false"
+  skip-test:
+    description: "Skip pytest tests"
+    required: false
+    default: "false"
 runs:
   using: "composite"
   steps:
@@ -17,11 +33,26 @@ runs:
       working-directory: ${{inputs.folder}}
       shell: bash
     - name: lint
+      if: inputs.skip-lint != 'true'
       run: uvx ruff check $FOLDER
       shell: bash
       env:
         FOLDER: ${{inputs.folder}}
+    - name: format check
+      if: inputs.skip-format-check != 'true'
+      run: uvx ruff format --check $FOLDER
+      shell: bash
+      env:
+        FOLDER: ${{inputs.folder}}
+    - name: type check
+      if: inputs.skip-type-check != 'true'
+      run: uv run mypy .
+      shell: bash
+      env:
+        FOLDER: ${{inputs.folder}}
+      working-directory: ${{inputs.folder}}
     - name: test
+      if: inputs.skip-test != 'true'
       id: test
       run: |
         set +e
