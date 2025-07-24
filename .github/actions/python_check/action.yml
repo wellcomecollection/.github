@@ -46,7 +46,7 @@ runs:
         FOLDER: ${{inputs.folder}}
     - name: type check
       if: inputs.skip-type-check != 'true'
-      run: uv run mypy $FOLDER
+      run: uv run mypy .
       shell: bash
       env:
         FOLDER: ${{inputs.folder}}
