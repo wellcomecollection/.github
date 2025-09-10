@@ -1,4 +1,4 @@
-name: 'Docker build and push'
+name: "Docker build and push"
 description: "Builds and publishes a Docker image to ECR"
 inputs:
   registry:
@@ -19,14 +19,31 @@ inputs:
   publish_latest:
     description: "Whether to publish an image with the 'latest' tag"
     required: false
-    type: 'boolean'
-    default: 'false'
+    type: "boolean"
+    default: "false"
+  dockerfile:
+    description: "Path to the Dockerfile (relative to the working folder)"
+    required: false
+    default: "Dockerfile"
 runs:
   using: "composite"
   steps:
     - name: build docker image
       run: |
-        docker build . --build-arg pythonversion=$(cat .python-version) --tag "${{inputs.target}}:${{inputs.tag}}" --target "${{inputs.target}}"
+        if [ -n "${{ inputs.dockerfile }}" ]; then
+          echo "Using explicit Dockerfile: ${{ inputs.dockerfile }}";
+          docker build . \
+            -f "${{ inputs.dockerfile }}" \
+            --build-arg pythonversion=$(cat .python-version) \
+            --tag "${{inputs.target}}:${{inputs.tag}}" \
+            --target "${{inputs.target}}";
+        else
+          echo "No dockerfile input provided (empty string) - letting Docker use default 'Dockerfile' if present";
+          docker build . \
+            --build-arg pythonversion=$(cat .python-version) \
+            --tag "${{inputs.target}}:${{inputs.tag}}" \
+            --target "${{inputs.target}}";
+        fi
       working-directory: ${{inputs.folder}}
       shell: bash
 
