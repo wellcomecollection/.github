@@ -35,12 +35,14 @@ runs:
           docker build . \
             -f "${{ inputs.dockerfile }}" \
             --build-arg pythonversion=$(cat .python-version) \
+            --provenance=false \
             --tag "${{inputs.target}}:${{inputs.tag}}" \
             --target "${{inputs.target}}";
         else
           echo "No dockerfile input provided (empty string) - letting Docker use default 'Dockerfile' if present";
           docker build . \
             --build-arg pythonversion=$(cat .python-version) \
+            --provenance=false \
             --tag "${{inputs.target}}:${{inputs.tag}}" \
             --target "${{inputs.target}}";
         fi
