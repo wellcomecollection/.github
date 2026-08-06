@@ -20,6 +20,10 @@ inputs:
     description: "Skip pytest tests"
     required: false
     default: "false"
+  ruff-version:
+    description: "Version of ruff to run. Pinned so that a new ruff release cannot change the lint result of unchanged code."
+    required: false
+    default: "0.16.1"
 runs:
   using: "composite"
   steps:
@@ -34,16 +38,18 @@ runs:
       shell: bash
     - name: lint
       if: inputs.skip-lint != 'true'
-      run: uvx ruff check $FOLDER
+      run: uvx ruff@$RUFF_VERSION check $FOLDER
       shell: bash
       env:
         FOLDER: ${{inputs.folder}}
+        RUFF_VERSION: ${{inputs.ruff-version}}
     - name: format check
       if: inputs.skip-format-check != 'true'
-      run: uvx ruff format --check $FOLDER
+      run: uvx ruff@$RUFF_VERSION format --check $FOLDER
       shell: bash
       env:
         FOLDER: ${{inputs.folder}}
+        RUFF_VERSION: ${{inputs.ruff-version}}
     - name: type check
       if: inputs.skip-type-check != 'true'
       run: uv run mypy .
