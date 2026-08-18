@@ -14,8 +14,16 @@ inputs:
     description: "tag for the image"
     required: true
   role_to_assume:
-    description: "role to assume when pushing the image to ECR"
-    required: true
+    description: "role to assume when pushing the image to ECR (required unless push is 'false')"
+    required: false
+    default: ""
+  push:
+    # String-compared like publish_latest. Lets callers build without
+    # publishing on runs that have no repo secrets (dependabot, fork PRs),
+    # e.g. push: ${{ secrets.MY_ROLE_ARN != '' }}
+    description: "Push the built image to ECR. Any string other than 'true' builds only."
+    required: false
+    default: "true"
   publish_latest:
     # Compared as a string below: action inputs are always strings, and `type`
     # is ignored here, so a bare truthiness test is true even for "false".
@@ -52,6 +60,7 @@ runs:
 
     - name: publish versioned container to registry
       uses: wellcomecollection/.github/.github/actions/push_to_ecr@main
+      if: ${{ inputs.push == 'true' }}
       with:
         registry: ${{inputs.registry}}
         image_name: ${{inputs.target}}
@@ -61,7 +70,7 @@ runs:
 
     - name: publish latest container to registry
       uses: wellcomecollection/.github/.github/actions/push_to_ecr@main
-      if: ${{ inputs.publish_latest == 'true' }}
+      if: ${{ inputs.push == 'true' && inputs.publish_latest == 'true' }}
       with:
         registry: 760097843905.dkr.ecr.eu-west-1.amazonaws.com/uk.ac.wellcome
         image_name: ${{inputs.target}}
