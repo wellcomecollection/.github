@@ -1,20 +1,48 @@
-# Runs auto-formatting script on push to any branch
+# The pushed branch's own build.sbt runs in the format job, so that job gets a
+# read-only token and hands its result to the push job as a patch. It still
+# holds id-token: write for the ECR pull, so any role that trusts the caller
+# repo on all refs is reachable from branch code.
+#
+# Pass the role ARN explicitly so a later edit to this shared workflow cannot
+# read anything else the caller holds. Scope the grant to the calling job:
+#
+#   jobs:
+#     autoformat:
+#       uses: wellcomecollection/.github/.github/workflows/scala_formatting.yml@main
+#       permissions:
+#         id-token: write
+#         contents: write
+#       secrets:
+#         GHA_SCALA_FORMATTING_ROLE_ARN: ${{ secrets.GHA_SCALA_FORMATTING_ROLE_ARN }}
 name: "Run auto formatting"
 
-# Unsure whether these need to be on the caller or called workflow
-permissions:
-  id-token: write
-  contents: write
-
-on: workflow_call
+on:
+  workflow_call:
+    secrets:
+      GHA_SCALA_FORMATTING_ROLE_ARN:
+        description: ARN of the pull-only role that fetches the formatting images from ECR
+        required: true
 
 jobs:
-  autoformat:
-    name: autoformat
+  format:
+    name: format
+    # Only a pushed branch head can take the formatting commit.
+    if: github.event_name == 'push' && github.ref_type == 'branch'
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    # A newer push to the same branch supersedes this run.
+    concurrency:
+      group: scala-formatting-${{ github.ref }}
+      cancel-in-progress: true
+    outputs:
+      changes: ${{ steps.diff.outputs.changes }}
     steps:
       - name: Check out project
         uses: actions/checkout@v7
+        with:
+          persist-credentials: false
 
       - name: Configure AWS credentials
         id: aws_credentials
@@ -34,18 +62,49 @@ jobs:
           AWS_SECRET_KEY: ${{ steps.aws_credentials.outputs.aws-secret-access-key }}
           AWS_SESSION_TOKEN: ${{ steps.aws_credentials.outputs.aws-session-token }}
 
-      - name: Check for formatting changes
-        id: check_formatting_changes
+      - name: Capture formatting changes
+        id: diff
+        # Tracked files only: formatters rewrite, they do not create.
         run: |
-          if [[ -n $(git status --porcelain) ]]; then
-              echo "changes=true" >> "$GITHUB_OUTPUT"; 
+          if ! git diff --quiet HEAD; then
+            git diff --binary HEAD > "$RUNNER_TEMP/formatting.patch"
+            echo "changes=true" >> "$GITHUB_OUTPUT"
           fi
 
+      - name: Upload formatting patch
+        if: steps.diff.outputs.changes == 'true'
+        uses: actions/upload-artifact@v7
+        with:
+          name: formatting-patch
+          path: ${{ runner.temp }}/formatting.patch
+          retention-days: 1
+
+  push:
+    name: push
+    needs: format
+    if: needs.format.outputs.changes == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    concurrency:
+      group: scala-formatting-${{ github.ref }}
+      cancel-in-progress: true
+    steps:
+      - name: Check out project
+        uses: actions/checkout@v7
+
+      - name: Download formatting patch
+        uses: actions/download-artifact@v8
+        with:
+          name: formatting-patch
+          path: ${{ runner.temp }}
+
       - name: Commit and push formatting changes
-        if: steps.check_formatting_changes.outputs.changes == 'true'
+        # The patch is untrusted; this is safe only while the token is
+        # GITHUB_TOKEN, which cannot write .github/workflows.
         run: |
+          git apply --index "$RUNNER_TEMP/formatting.patch"
           git config user.name "Github on behalf of Wellcome Collection"
           git config user.email "wellcomedigitalplatform@wellcome.ac.uk"
-          git commit -am "Apply auto-formatting rules"
+          git commit -m "Apply auto-formatting rules"
           git push
-
