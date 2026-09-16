@@ -34,27 +34,46 @@ inputs:
     description: "Path to the Dockerfile (relative to the working folder)"
     required: false
     default: "Dockerfile"
+  build_args:
+    # Reaches the script through the environment rather than being interpolated
+    # into it, so a caller's value cannot run as shell.
+    description: "Extra build arguments, one KEY=VALUE per line. Values are readable in the published image via docker history, so do not pass secrets. pythonversion is passed first and a value here overrides it."
+    required: false
+    default: ""
 runs:
   using: "composite"
   steps:
     - name: build docker image
+      # Every caller-controlled value reaches the script through the environment
+      # rather than being interpolated into it, so none of them can run as shell.
+      env:
+        BUILD_ARGS: ${{ inputs.build_args }}
+        DOCKERFILE: ${{ inputs.dockerfile }}
+        TARGET: ${{ inputs.target }}
+        TAG: ${{ inputs.tag }}
       run: |
-        if [ -n "${{ inputs.dockerfile }}" ]; then
-          echo "Using explicit Dockerfile: ${{ inputs.dockerfile }}";
-          docker build . \
-            -f "${{ inputs.dockerfile }}" \
-            --build-arg pythonversion=$(cat .python-version) \
-            --provenance=false \
-            --tag "${{inputs.target}}:${{inputs.tag}}" \
-            --target "${{inputs.target}}";
+        # One argument list rather than two near-identical commands, so an
+        # option cannot be added to the explicit-Dockerfile branch alone.
+        # A folder without .python-version builds with an empty value, as it did
+        # before this was an array: errexit treats a failed assignment as fatal.
+        args=(--build-arg "pythonversion=$(cat .python-version 2>/dev/null || true)" --provenance=false)
+
+        while IFS= read -r build_arg; do
+          [ -n "$build_arg" ] && args+=(--build-arg "$build_arg")
+        done <<< "$BUILD_ARGS"
+
+        if [ -n "$DOCKERFILE" ]; then
+          echo "Using explicit Dockerfile: $DOCKERFILE";
+          args+=(-f "$DOCKERFILE")
         else
           echo "No dockerfile input provided (empty string) - letting Docker use default 'Dockerfile' if present";
-          docker build . \
-            --build-arg pythonversion=$(cat .python-version) \
-            --provenance=false \
-            --tag "${{inputs.target}}:${{inputs.tag}}" \
-            --target "${{inputs.target}}";
         fi
+
+        docker build \
+          "${args[@]}" \
+          --tag "$TARGET:$TAG" \
+          --target "$TARGET" \
+          .
       working-directory: ${{inputs.folder}}
       shell: bash
 
