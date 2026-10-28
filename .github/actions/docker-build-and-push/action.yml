@@ -43,6 +43,24 @@ inputs:
 runs:
   using: "composite"
   steps:
+    # Anonymous base-image pulls from ECR Public hit its rate limit. Best effort:
+    # a role that can't be assumed here or lacks ecr-public access pulls anonymously.
+    - name: assume role for ECR Public login
+      id: ecr-public-credentials
+      if: ${{ inputs.role_to_assume != '' }}
+      continue-on-error: true
+      uses: aws-actions/configure-aws-credentials@v6
+      with:
+        aws-region: us-east-1
+        role-to-assume: ${{ inputs.role_to_assume }}
+
+    - name: log in to ECR Public
+      if: ${{ steps.ecr-public-credentials.outcome == 'success' }}
+      continue-on-error: true
+      uses: aws-actions/amazon-ecr-login@v2
+      with:
+        registry-type: public
+
     - name: build docker image
       # Every caller-controlled value reaches the script through the environment
       # rather than being interpolated into it, so none of them can run as shell.
