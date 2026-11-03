@@ -69,12 +69,22 @@ runs:
         DOCKERFILE: ${{ inputs.dockerfile }}
         TARGET: ${{ inputs.target }}
         TAG: ${{ inputs.tag }}
+        FOLDER: ${{ inputs.folder }}
       run: |
         # One argument list rather than two near-identical commands, so an
         # option cannot be added to the explicit-Dockerfile branch alone.
         # A folder without .python-version builds with an empty value, as it did
         # before this was an array: errexit treats a failed assignment as fatal.
         args=(--build-arg "pythonversion=$(cat .python-version 2>/dev/null || true)" --provenance=false)
+
+        # Where the image came from, so a vulnerability finding on it can link to the
+        # commit and Dockerfile that built it.
+        dockerfile_path="${FOLDER%/}/${DOCKERFILE:-Dockerfile}"
+        args+=(
+          --label "org.opencontainers.image.source=$GITHUB_SERVER_URL/$GITHUB_REPOSITORY"
+          --label "org.opencontainers.image.revision=$GITHUB_SHA"
+          --label "org.wellcomecollection.dockerfile=${dockerfile_path#./}"
+        )
 
         while IFS= read -r build_arg; do
           [ -n "$build_arg" ] && args+=(--build-arg "$build_arg")
