@@ -73,9 +73,10 @@ jobs:
       - name: Capture formatting changes
         id: diff
         # Tracked files only: formatters rewrite, they do not create.
+        # GITHUB_TOKEN cannot push workflow changes, so they stay out of the patch.
         run: |
-          if ! git diff --quiet HEAD; then
-            git diff --binary HEAD > "$RUNNER_TEMP/formatting.patch"
+          if ! git diff --quiet HEAD -- . ':!.github/workflows'; then
+            git diff --binary HEAD -- . ':!.github/workflows' > "$RUNNER_TEMP/formatting.patch"
             echo "changes=true" >> "$GITHUB_OUTPUT"
           fi
 
@@ -94,9 +95,10 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    # Its own group, so an older run's push cannot cancel a newer run's format job.
+    # If it loses the race it fails as non-fast-forward and the newer run pushes.
     concurrency:
-      group: scala-formatting-${{ github.ref }}
-      cancel-in-progress: true
+      group: scala-formatting-push-${{ github.ref }}
     steps:
       - name: Check out project
         uses: actions/checkout@v7
